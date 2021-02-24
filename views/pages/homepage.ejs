@@ -3,12 +3,17 @@
   <head>
     <meta charset="utf-8">
     <title>Battle Snake</title>
+    <script src="/js/login.js"></script>
   </head>
   <body>
 
   <h1>Homepage</h1>
 
   <p>Login here</p>
+  <form id="form" onsubmit="return false;">
+    <input style="position:absolute; top:15%; left:5%; width:40%;" type="text" id="userInput" />
+    <input style="position:absolute; top:18%; left:5%; width:40%;" type="submit" onclick="userInfoSubmit();" />
+  </form>
 
   </body>
 </html>
