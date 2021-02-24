@@ -2,9 +2,9 @@ const express = require('express')
 const path = require('path')
 const PORT = process.env.PORT || 5000
 const { Pool } = require('pg');
-var pool;
-pool = new Pool({
-  connectionString: process.env.DATABASE_URL
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
 });
 
 pool.connect();
@@ -15,10 +15,28 @@ express()
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .get('/', (req,res) => res.render('pages/homepage'))
+  .get('/users',(req, res) =>{
+    let getUserQuery = `SELECT * FROM userstab`;
+    pool.query(getUserQuery, (error,result)=>{
+      if(error){
+        res.end(error);
+      };
+      let results = {'rows': result.rows};
+      res.render('pages/users',results);
+    })
+  })
+
+
+
+
+
+
+
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
 
-  
+
+
 /*
 const express = require('express')
 const path = require('path')
